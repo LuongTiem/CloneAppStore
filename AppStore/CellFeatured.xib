@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CellFeatured" customModule="AppStore" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="112" height="206"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="112" height="206"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clashroyale" translatesAutoresizingMaskIntoConstraints="NO" id="6bK-lh-Njt">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="H4c-po-Zhb"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telepaints" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRU-RJ-dqD">
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Games" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7G0-ko-8Hq">
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3.99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQC-Z8-HAv">
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="zQC-Z8-HAv" firstAttribute="top" secondItem="7G0-ko-8Hq" secondAttribute="bottom" constant="8" id="8b2-Am-Ogg"/>
+                <constraint firstItem="7G0-ko-8Hq" firstAttribute="leading" secondItem="eRU-RJ-dqD" secondAttribute="leading" id="8eI-3d-AYu"/>
+                <constraint firstItem="7G0-ko-8Hq" firstAttribute="top" secondItem="eRU-RJ-dqD" secondAttribute="bottom" constant="8" id="AVp-7B-Cd2"/>
+                <constraint firstAttribute="trailing" secondItem="eRU-RJ-dqD" secondAttribute="trailing" id="Bjx-Bx-5bC"/>
+                <constraint firstItem="6bK-lh-Njt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="DCx-6E-KsZ"/>
+                <constraint firstItem="7G0-ko-8Hq" firstAttribute="trailing" secondItem="eRU-RJ-dqD" secondAttribute="trailing" id="HGW-ww-cyp"/>
+                <constraint firstItem="eRU-RJ-dqD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cMJ-zs-rz3"/>
+                <constraint firstItem="zQC-Z8-HAv" firstAttribute="trailing" secondItem="7G0-ko-8Hq" secondAttribute="trailing" id="lMY-wL-slH"/>
+                <constraint firstItem="eRU-RJ-dqD" firstAttribute="top" secondItem="6bK-lh-Njt" secondAttribute="bottom" constant="8" id="lxV-JA-J8E"/>
+                <constraint firstItem="zQC-Z8-HAv" firstAttribute="leading" secondItem="7G0-ko-8Hq" secondAttribute="leading" id="mkD-eR-O7K"/>
+                <constraint firstItem="6bK-lh-Njt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vhT-RZ-znG"/>
+                <constraint firstAttribute="trailing" secondItem="6bK-lh-Njt" secondAttribute="trailing" id="yI2-8v-HYy"/>
+            </constraints>
+            <size key="customSize" width="112" height="213"/>
+            <connections>
+                <outlet property="category" destination="7G0-ko-8Hq" id="C0X-pa-R99"/>
+                <outlet property="imageViews" destination="6bK-lh-Njt" id="wCj-Q7-YZy"/>
+                <outlet property="name" destination="eRU-RJ-dqD" id="dyt-Ck-cuT"/>
+                <outlet property="price" destination="zQC-Z8-HAv" id="Zjh-oR-pSV"/>
+            </connections>
+            <point key="canvasLocation" x="56" y="-39"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="clashroyale" width="175" height="175"/>
+    </resources>
+</document>
