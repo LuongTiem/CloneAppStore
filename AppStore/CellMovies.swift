@@ -15,10 +15,7 @@ class CellMovies: UICollectionViewCell {
     @IBOutlet weak var imageViews: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-       
-        imageViews.layer.cornerRadius = 5
-        imageViews.layer.masksToBounds = true
+        
         
     }
     

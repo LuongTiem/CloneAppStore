@@ -22,6 +22,7 @@ class TabTopMusic: BaseViewController {
         tableview.dataSource  = self
         
         tableview.register(UINib(nibName: "CellMusic", bundle: nil), forCellReuseIdentifier: "CellMusic")
+        tableview.register(UINib(nibName: "CellAlbums", bundle: nil), forCellReuseIdentifier: "CellAlbums")
         
         DataManager.shareInstance.getTopSong { (api) in
             
@@ -50,31 +51,55 @@ class TabTopMusic: BaseViewController {
 extension TabTopMusic : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let stringURL = listTopAlbums[indexPath.row].image
-        let url = URL(string: stringURL!)!
-        (cell as! CellMusic).imageViews.kf.setImage(with: url, options: [.transition(.fade(1))])
-        (cell as! CellMusic).Music = listTopAlbums[indexPath.row]
         
         
+        if segmentedControl.selectedSegmentIndex == 0 {
+            let stringURL = listTopSong[indexPath.row].image
+            let url = URL(string: stringURL!)!
+            (cell as! CellMusic).imageViews.kf.setImage(with: url, options: [.transition(.fade(1))])
+            (cell as! CellMusic).Music = listTopSong[indexPath.row]
+        }else{
+            
+            let stringURL = listTopAlbums[indexPath.row].image
+            let url = URL(string: stringURL!)!
+            (cell as! CellAlbums).imageViews.kf.setImage(with: url, options: [.transition(.fade(1))])
+            (cell as! CellAlbums).Album = listTopAlbums[indexPath.row]
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (segmentedControl.selectedSegmentIndex == 1) {
+            return 150
+        }
         return 130
     }
     
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as! CellMusic).imageViews.kf.cancelDownloadTask()
-    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listTopAlbums.count
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return listTopSong.count
+        }else{
+            return listTopAlbums.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = self.storyboard?.instantiateViewController(withIdentifier: "detailview") as! DetailView
-        detailView.data = listTopAlbums[indexPath.row]
-        detailView.title = listTopAlbums[indexPath.row].name
-        navigationController?.pushViewController(detailView, animated: true)
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            
+            detailView.data = listTopSong[indexPath.row]
+            detailView.title = listTopSong[indexPath.row].name
+            navigationController?.pushViewController(detailView, animated: true)
+        }else{
+            detailView.data = listTopAlbums[indexPath.row]
+            detailView.title = listTopAlbums[indexPath.row].name
+            navigationController?.pushViewController(detailView, animated: true)
+        }
+        
     }
     
 }
@@ -83,8 +108,17 @@ extension TabTopMusic : UITableViewDelegate {
 extension TabTopMusic : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CellMusic", for: indexPath) as! CellMusic
-        cell.imageViews.kf.indicatorType = .activity
-        return cell
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CellMusic", for: indexPath) as! CellMusic
+            cell.imageViews.kf.indicatorType = .activity
+            return cell
+        }else{
+            let cellAlbums = tableview.dequeueReusableCell(withIdentifier: "CellAlbums", for: indexPath) as! CellAlbums
+            
+            cellAlbums.imageViews.kf.indicatorType = .activity
+            return cellAlbums
+        }
+        
     }
 }

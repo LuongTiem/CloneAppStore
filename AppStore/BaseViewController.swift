@@ -40,7 +40,10 @@ class BaseViewController: UIViewController {
     
     
     func actionSegmentControl(){
-        tableview.reloadData()
+        DispatchQueue.main.async { 
+            self.tableview.reloadData()
+        }
+        
         
     }
 

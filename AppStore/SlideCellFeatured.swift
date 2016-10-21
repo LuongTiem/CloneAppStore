@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SlideCellFeatured: UICollectionViewCell {
 
@@ -15,5 +16,7 @@ class SlideCellFeatured: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+
 
 }

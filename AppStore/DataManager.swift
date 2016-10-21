@@ -26,7 +26,7 @@ class DataManager {
     static let linkTopTvEpisodes  = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topTvEpisodes/json"
     
     static let linkGetFull  = "http://itunes.apple.com/lookup?id="
-    
+   
     
     
     private init(){
@@ -36,7 +36,11 @@ class DataManager {
     static let shareInstance = DataManager()
     
     
+
     
+    
+    
+    //--
     func getTopFreeApp(completion : @escaping (CallAPI) -> ()){
         
         let url = URL(string: DataManager.linkTopFreeApp)!
@@ -166,27 +170,6 @@ class DataManager {
     }
     
     
-    
-    
-    //-- get Movies 
-    
-    
-    func getMovies (stringID : String , completion : @escaping (CallAPI) -> ()) {
-        
-        let url = URL(string: DataManager.linkGetFull + stringID)!
-        Alamofire.request(url).responseJSON { (response) in
-            
-            if let json = response.result.value as? [String: AnyObject]{
-                let feed = json["feed"] as? [String : AnyObject]
-                let api = CallAPI.init(feed: feed!)
-                completion(api!)
-                
-            }
-            
-        }
-
-    }
-    
     func getTopAlbumsNow(completion : @escaping (API_Albums)->()){
         
         
@@ -200,6 +183,80 @@ class DataManager {
                 
             }
         }
+    }
+    
+    
+    //-- get DetailApp
+    
+    
+    func getDetailApp (stringID : String , completion : @escaping (DetailApp) -> ()) {
+        
+        let url = URL(string: DataManager.linkGetFull + stringID)!
+        Alamofire.request(url).responseJSON { (response) in
+            
+            if let json = response.result.value as? [String: AnyObject]{
+                
+                let api = DetailApp.init(json: json)
+                if api != nil {
+                    completion(api!)
+                }else{
+                    return
+                }
+               
+                
+            }
+            
+        }
+
+    }
+    
+    
+    //-- get Deatail Song 
+    
+    func getDetailSong(stringID : String , completion : @escaping (DetailSong) -> ()){
+        
+        let url = URL(string: DataManager.linkGetFull + stringID)!
+        Alamofire.request(url).responseJSON { (response) in
+            
+            if let json = response.result.value as? [String: AnyObject]{
+                
+                let api = DetailSong.init(json: json)
+                if api != nil {
+                    completion(api!)
+                }else{
+                    
+                    return
+                }
+                
+            }
+            
+        }
+        
+    }
+   
+    //-- getDeail Albums 
+    
+    func getDetailAlbums(stringID : String , completion : @escaping (DetailAlbum) -> ()){
+        
+        let url = URL(string: DataManager.linkGetFull + stringID)!
+        Alamofire.request(url).responseJSON { (response) in
+            
+            if let json = response.result.value as? [String: AnyObject]{
+                
+                let api = DetailAlbum.init(json: json)
+                
+                if api != nil {
+                    completion(api!)
+                }else{
+                    
+                    return
+                }
+                
+                
+            }
+            
+        }
+        
     }
     
     

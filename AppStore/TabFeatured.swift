@@ -7,13 +7,14 @@
 //
 
 import UIKit
-
+import Kingfisher
 class TabFeatured: UIViewController {
     
     @IBOutlet weak var slideCollectionFeatured: UICollectionView!
     @IBOutlet weak var tableViews: UITableView!
-
+    
     var listAPI = [CallAPI]()
+    var listImageSlide: [String]?
     
     
     override func viewDidLoad() {
@@ -28,7 +29,7 @@ class TabFeatured: UIViewController {
         
         loadData()
         
-       
+        
         
         
     }
@@ -42,38 +43,44 @@ class TabFeatured: UIViewController {
             self.tableViews.reloadData()
         }
         
-
+        
         DataManager.shareInstance.getTopRaidApp { (api) in
-          self.listAPI.append(api)
+            self.listAPI.append(api)
             self.tableViews.reloadData()
         }
         
         DataManager.shareInstance.getTopAlbums { (api) in
-         self.listAPI.append(api)
+            self.listAPI.append(api)
             self.tableViews.reloadData()
         }
         
         DataManager.shareInstance.getTopSong { (api) in
-           self.listAPI.append(api)
+            self.listAPI.append(api)
             self.tableViews.reloadData()
         }
         
         
         DataManager.shareInstance.getTopMovies { (api) in
-           self.listAPI.append(api)
+            self.listAPI.append(api)
             self.tableViews.reloadData()
             
         }
         
         DataManager.shareInstance.getTopEpisodes { (api) in
-          self.listAPI.append(api)
+            self.listAPI.append(api)
             self.tableViews.reloadData()
+    
         }
         
+        DataManager.shareInstance.getDetailApp(stringID: "563718995") { (response) in
+            self.listImageSlide = response.screenshotUrls
+            self.slideCollectionFeatured.reloadData()
+        }
+       
         
     }
- 
-
+    
+    
     
     
 }
@@ -101,22 +108,24 @@ extension TabFeatured: UITableViewDelegate {
         
         return 240
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let allTabar = self.tabBarController?.viewControllers
-        if indexPath.row == 0 {
-            self.tabBarController?.selectedIndex = 1
-//            let tabTopFreeApp  = (allTabar?[1] as! UINavigationController).topViewController as! TabTopApp
-//                tabTopFreeApp.listTopApp = listTopFreeApp
-            
-        }else if (indexPath.row == 1) {
-            self.tabBarController?.selectedIndex = 2
-        }else if (indexPath.row == 2){
-            self.tabBarController?.selectedIndex = 3
-        }else{
-            self.tabBarController?.selectedIndex = 0
-        }
-    }
+    /*
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     //  let allTabar = self.tabBarController?.viewControllers
+     if indexPath.row == 0 {
+     self.tabBarController?.selectedIndex = 1
+     //            let tabTopFreeApp  = (allTabar?[1] as! UINavigationController).topViewController as! TabTopApp
+     //                tabTopFreeApp.listTopApp = listTopFreeApp
+     
+     }else if (indexPath.row == 1) {
+     self.tabBarController?.selectedIndex = 2
+     }else if (indexPath.row == 2){
+     self.tabBarController?.selectedIndex = 3
+     }else{
+     self.tabBarController?.selectedIndex = 0
+     }
+     }
+     
+     */
 }
 
 
@@ -134,12 +143,28 @@ extension TabFeatured : PushDetailDelegate {
 
 extension TabFeatured : UICollectionViewDataSource,UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideCell", for: indexPath) as! SlideCellFeatured
+        cell.imageSlideCell.kf.indicatorType = .activity
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        
+        if let count = listImageSlide?.count {
+           
+            return count
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let stringURL = listImageSlide?[indexPath.item]
+        let url = URL(string: stringURL!)!
+        (cell as! SlideCellFeatured).imageSlideCell.kf.setImage(with: url, options: [.transition(.flipFromLeft(0.75))])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as! SlideCellFeatured).imageSlideCell.kf.cancelDownloadTask()
     }
 }
 
