@@ -8,17 +8,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="155" id="KGk-i7-Jjw" customClass="CellSlideApp" customModule="AppStore" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="190" id="KGk-i7-Jjw" customClass="CellSlideApp" customModule="AppStore" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="154"/>
+                <frame key="frameInset" width="320" height="190"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YJP-1Q-2Uw">
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="150" id="1Lm-KY-Acs"/>
+                            <constraint firstAttribute="height" constant="150" id="u8x-pa-gC5"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4On-0Q-Lb8">
                             <size key="itemSize" width="50" height="50"/>
@@ -27,17 +27,26 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTk-ty-w8V">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="6" id="5zK-oG-tFX"/>
+                            <constraint firstAttribute="width" constant="240" id="eEI-9C-lnr"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="YJP-1Q-2Uw" secondAttribute="trailing" id="6nQ-Dj-pOl"/>
-                    <constraint firstItem="YJP-1Q-2Uw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bxH-WH-fi4"/>
-                    <constraint firstItem="YJP-1Q-2Uw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="zCy-aO-Cpw"/>
+                    <constraint firstAttribute="trailing" secondItem="YJP-1Q-2Uw" secondAttribute="trailing" id="DCV-Yd-AuV"/>
+                    <constraint firstItem="YJP-1Q-2Uw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QKY-e3-eV0"/>
+                    <constraint firstItem="pTk-ty-w8V" firstAttribute="top" secondItem="YJP-1Q-2Uw" secondAttribute="bottom" priority="250" id="avz-GP-yS7"/>
+                    <constraint firstItem="YJP-1Q-2Uw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bI6-Ww-RZy"/>
+                    <constraint firstItem="pTk-ty-w8V" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="pfW-cJ-VPb"/>
+                    <constraint firstAttribute="bottom" secondItem="pTk-ty-w8V" secondAttribute="bottom" id="v90-AN-Vos"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="YJP-1Q-2Uw" id="pAR-vA-ONG"/>
             </connections>
-            <point key="canvasLocation" x="32" y="187.5"/>
+            <point key="canvasLocation" x="32" y="205"/>
         </tableViewCell>
     </objects>
 </document>

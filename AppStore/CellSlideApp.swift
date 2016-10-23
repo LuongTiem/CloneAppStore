@@ -27,15 +27,13 @@ class CellSlideApp: UITableViewCell {
             
             collectionView.register(UINib(nibName: "SlideCellFeatured", bundle: nil), forCellWithReuseIdentifier: "SlideCellFeatured")
             arrImage = loadDetailApp?.screenshotUrls
+            collectionView.sizeToFit()
+            collectionView.contentSize = CGSize(width: self.frame.width, height: 150)
            collectionView.reloadData()
         }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+   
     
     func setupCollectionView(){
         

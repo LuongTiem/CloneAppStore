@@ -25,14 +25,14 @@ class DetailView: BaseDetailView {
         
         tableview.delegate = self
         tableview.dataSource = self
-        
+        self.tableview.rowHeight = UITableViewAutomaticDimension
         setupHeaderTitleView(data : data! ,radius: 16)
         
         
         tableview.register(UINib(nibName: "CellSlideApp", bundle: nil), forCellReuseIdentifier: "CellSlideApp")
         tableview.register(UINib(nibName: "CellDetailApp", bundle: nil), forCellReuseIdentifier: "CellDetailApp")
         tableview.register(UINib(nibName: "CellDetailSong", bundle: nil), forCellReuseIdentifier: "CellDetailSong")
-        self.tableview.rowHeight = UITableViewAutomaticDimension
+        
         
         let listSegment = ["Detail", "Review", "Rate"]
         initSegmentControl(listSegment: listSegment)
@@ -79,25 +79,29 @@ extension DetailView : UITableViewDelegate {
         return 2
     }
     
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 0 {
+//            return 150
+//        }
+//        else{
+//            return 1200
+//        }
+//    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 150
+    
+    
+    
+        func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    
+            if indexPath.row == 0 {
+                return 150
+                
+            }else {
+                return 1000
+            }
+            
         }
-        else{
-            return 1200
-        }
-    }
-    
-    
-    
-    //
-    //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    //
-    //
-    //            return 150
-    //
-    //    }
     
 }
 
