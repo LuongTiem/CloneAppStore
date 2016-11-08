@@ -14,45 +14,85 @@ class TabTopApp: BaseViewController {
     var listTopFreeApp = [Entry]()
     var listTopPaidApp = [Entry]()
     
-    var checkLoadMore : Bool = false
-    var loadElement : Int = 20
+    var loadElementFree : Int = 20
+    var loadElementRaid : Int = 20
     
     //-- loading
     let refeshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         tableview.delegate  = self
         tableview.dataSource = self
         tableview.backgroundColor = UIColor.clear
         tableview.register(UINib(nibName: "CellApp", bundle: nil), forCellReuseIdentifier: "Cell")
         tableview.addSubview(refeshControl)
+        setupFooterView(showFooter: false)
         
-        
-        tableview.register(CustomFooterHeader.self, forHeaderFooterViewReuseIdentifier: "footer")
-        
-        //--
-        
-        
-        
-        
-        loadData(element: nil)
-        
-        DataManager.shareInstance.getTopRaidApp { (api) in
-            self.listTopPaidApp = api.entry!
-            self.navigationItem.title = api.title
-            self.tableview.reloadData()
-        }
-        
-        
+      
+        //-- init segment
         let itemSegment = ["Top Free App", "Top Paid App"]
         initSegmentControl(listSegment: itemSegment)
+        
+        
+        //-- init data
+        loadData(element: nil, loadType: DataManager.TOPFREE)
+        loadData(element: nil, loadType: DataManager.TOPRAID)
         
         
     }
     
     
-    func loadData(element : Int?){
+    
+    //MARK: UIVIEW FOOTER
+    var indicatorLoading : UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView()
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.color = UIColor.red
+        loading.hidesWhenStopped = true
+        return loading
+    }()
+    
+    var  viewFooter : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }()
+    
+    
+    //-- setup FooterView
+    
+    func setupFooterView (showFooter : Bool){
+        
+        if showFooter == true {
+            viewFooter.frame = CGRect(x: 0, y: 0, width: tableview.frame.width, height: 30)
+            self.viewFooter.addSubview(indicatorLoading)
+            indicatorLoading.centerXAnchor.constraint(equalTo: viewFooter.centerXAnchor).isActive = true
+            indicatorLoading.centerYAnchor.constraint(equalTo: viewFooter.centerYAnchor).isActive = true
+            indicatorLoading.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            indicatorLoading.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            indicatorLoading.startAnimating()
+            viewFooter.updateFocusIfNeeded()
+            self.tableview.tableFooterView = viewFooter
+            self.tableview.setNeedsFocusUpdate()
+        }else{
+            self.indicatorLoading.stopAnimating()
+            self.tableview.tableFooterView = nil
+        }
+        
+        
+    }
+    
+    
+    //MARK: - LOAD DATA
+    func loadData(element : Int?, loadType : String){
+        
+        loadType == DataManager.TOPFREE ? loadDataTopFree(element: element) : loadDataTopRaid(element: element)
+        self.setupFooterView(showFooter: false)
+    }
+    
+    //-- load data free
+    func loadDataTopFree(element : Int?){
         
         if  element == nil {
             DataManager.shareInstance.getTopFreeApp(element: 10) { (api) in
@@ -60,32 +100,52 @@ class TabTopApp: BaseViewController {
                 self.navigationItem.title = api.title
                 self.tableview.reloadData()
             }
-            
             return
         }
-        
         DataManager.shareInstance.getTopFreeApp(element: element!) { (api) in
-            
-            let resultAPI = api.entry!
             var appendAPI = [Entry]()
-            
-            print(self.listTopFreeApp.count)
-            print(resultAPI.count)
-            for (index,element1) in resultAPI.enumerated() {
-                if index < self.loadElement - 10 {
-                    print(index)
+            for (index,element1) in  (api.entry!).enumerated() {
+                if index < self.loadElementFree - 10 {
+                    //  print(index)
                     //  resultAPI.remove(at: index)
                 }else{
-                    appendAPI.append(element1)
+                   appendAPI.append(element1)
                 }
                 
             }
-            
-            
             self.listTopFreeApp.append(contentsOf: appendAPI)
             self.tableview.reloadData()
-            self.loadElement += 10
+            self.loadElementFree += 10
             
+        }
+        
+    }
+    //-- load data raid
+    func loadDataTopRaid(element : Int?){
+        
+        if  element == nil {
+            DataManager.shareInstance.getTopRaidApp(element: 10) { (api) in
+                self.listTopPaidApp = api.entry!
+                self.navigationItem.title = api.title
+                self.tableview.reloadData()
+            }
+            return
+        }
+        
+        DataManager.shareInstance.getTopRaidApp(element: element!) { (api) in
+            var appendAPI = [Entry]()
+            for (index,element1) in  (api.entry!).enumerated() {
+                if index < self.loadElementRaid - 10 {
+                  
+                }else{
+                   appendAPI.append(element1)
+                   
+                }
+                
+            }
+            self.listTopPaidApp.append(contentsOf: appendAPI)
+            self.tableview.reloadData()
+            self.loadElementRaid += 10
             
         }
         
@@ -103,9 +163,12 @@ extension TabTopApp : UITableViewDelegate {
         
         if refeshControl.isRefreshing {
             
-            loadData(element: nil)
+            if segmentedControl.selectedSegmentIndex  == 0 {
+                loadData(element: loadElementFree, loadType: DataManager.TOPFREE)
+            }else{
+                loadData(element: loadElementRaid, loadType: DataManager.TOPRAID)
+            }
             refeshControl.endRefreshing()
-            
         }
         
     }
@@ -118,11 +181,18 @@ extension TabTopApp : UITableViewDelegate {
         
         if offsetY > contentHeight - scrollView.frame.size.height {
             
-            loadData(element: loadElement)
+            
+            if segmentedControl.selectedSegmentIndex  == 0 {
+                loadData(element: loadElementFree, loadType: DataManager.TOPFREE)
+            }else if segmentedControl.selectedSegmentIndex  == 1 {
+                loadData(element: loadElementRaid, loadType: DataManager.TOPRAID)
+            }
+            self.setupFooterView(showFooter: true)
             
         }
         
     }
+    
     
     
     

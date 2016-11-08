@@ -44,7 +44,7 @@ class TabFeatured: UIViewController {
         }
         
         
-        DataManager.shareInstance.getTopRaidApp { (api) in
+        DataManager.shareInstance.getTopRaidApp(element: 10) { (api) in
             self.listAPI.append(api)
             self.tableViews.reloadData()
         }

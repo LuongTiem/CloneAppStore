@@ -17,17 +17,19 @@ class DataManager {
     
     static let linkTopAlbums = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topalbums/limit=10/json"
     
-    static let linkTopRaidApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit=10/json"
+    static let linkTopRaidApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit="
     
-    static let linkTopFreeApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/json"
-    static let linkTop25FreeApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=25/json"
+    static let linkTopFreeApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit="
     
     static let linkTopMovies = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json"
     static let linkTopTvSeasons = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topTvSeasons/json"
     static let linkTopTvEpisodes  = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topTvEpisodes/json"
     
     static let linkGetFull  = "http://itunes.apple.com/lookup?id="
-   
+    
+    
+    static let TOPFREE = "TOPFREE"
+    static let TOPRAID = "TOPRAID"
     
     
     private init(){
@@ -37,14 +39,14 @@ class DataManager {
     static let shareInstance = DataManager()
     
     
-
+    
     
     
     
     //--
     func getTopFreeApp(element : Int , completion : @escaping (CallAPI) -> ()){
         
-        let stringURL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=\(element)/json"
+        let stringURL =  DataManager.linkTopFreeApp  +  "\(element)/json"
         let url = URL(string: stringURL)!
         
         Alamofire.request(url).responseJSON { (response) in
@@ -52,38 +54,39 @@ class DataManager {
             
             if let json = response.result.value as? [String: AnyObject]{
                 
-                 let feed = json["feed"] as? [String : AnyObject]
-                 let api = CallAPI.init(feed: feed!)
-                 completion(api!)
+                let feed = json["feed"] as? [String : AnyObject]
+                let api = CallAPI.init(feed: feed!)
+                completion(api!)
                 
                 
             }
         }
     }
     
-
+    
     
     //-- get Top Raid App
     
-        func getTopRaidApp(completion : @escaping (CallAPI) -> ()){
-    
-            let url = URL(string: DataManager.linkTopRaidApp)!
-    
-            Alamofire.request(url).responseJSON { (response) in
-    
-    
-                if let json = response.result.value as? [String: AnyObject]{
-                    let feed = json["feed"] as? [String : AnyObject]
-                    let api = CallAPI.init(feed: feed!)
-                    completion(api!)
+    func getTopRaidApp(element : Int , completion : @escaping (CallAPI) -> ()){
         
+        let stringURL =  DataManager.linkTopRaidApp  +  "\(element)/json"
+        let url = URL(string: stringURL)!
+        
+        Alamofire.request(url).responseJSON { (response) in
+            
+            
+            if let json = response.result.value as? [String: AnyObject]{
                 
-                }
+                let feed = json["feed"] as? [String : AnyObject]
+                let api = CallAPI.init(feed: feed!)
+                completion(api!)
+                
+                
             }
-        }
+        }        }
     
     
-    //-- get Top Song 
+    //-- get Top Song
     
     func getTopSong(completion : @escaping (CallAPI)->()){
         let url = URL(string: DataManager.linkTopSong)!
@@ -92,14 +95,14 @@ class DataManager {
                 let feed = json["feed"] as? [String : AnyObject]
                 let api = CallAPI.init(feed: feed!)
                 completion(api!)
- 
+                
             }
         }
         
     }
     
     
-    //-- get Top Albums 
+    //-- get Top Albums
     
     func getTopAlbums(completion : @escaping (CallAPI)-> ()){
         let url = URL(string: DataManager.linkTopAlbums)!
@@ -116,8 +119,8 @@ class DataManager {
     }
     
     
-   //-- get Top Movies 
-
+    //-- get Top Movies
+    
     func getTopMovies (completion : @escaping (CallAPI)->()){
         
         let url = URL(string: DataManager.linkTopMovies)!
@@ -131,11 +134,11 @@ class DataManager {
             }
             
         }
-   
+        
     }
     
     
-    //-- get Top TV Episodes 
+    //-- get Top TV Episodes
     
     func getTopEpisodes(completion : @escaping (CallAPI)->()){
         
@@ -204,16 +207,16 @@ class DataManager {
                 }else{
                     return
                 }
-               
+                
                 
             }
             
         }
-
+        
     }
     
     
-    //-- get Deatail Song 
+    //-- get Deatail Song
     
     func getDetailSong(stringID : String , completion : @escaping (DetailSong) -> ()){
         
@@ -235,8 +238,8 @@ class DataManager {
         }
         
     }
-   
-    //-- getDeail Albums 
+    
+    //-- getDeail Albums
     
     func getDetailAlbums(stringID : String , completion : @escaping (DetailAlbum) -> ()){
         
