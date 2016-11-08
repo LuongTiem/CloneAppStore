@@ -20,6 +20,7 @@ class DataManager {
     static let linkTopRaidApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/toppaidapplications/limit=10/json"
     
     static let linkTopFreeApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=10/json"
+    static let linkTop25FreeApp = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=25/json"
     
     static let linkTopMovies = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json"
     static let linkTopTvSeasons = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topTvSeasons/json"
@@ -41,9 +42,10 @@ class DataManager {
     
     
     //--
-    func getTopFreeApp(completion : @escaping (CallAPI) -> ()){
+    func getTopFreeApp(element : Int , completion : @escaping (CallAPI) -> ()){
         
-        let url = URL(string: DataManager.linkTopFreeApp)!
+        let stringURL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topfreeapplications/limit=\(element)/json"
+        let url = URL(string: stringURL)!
         
         Alamofire.request(url).responseJSON { (response) in
             

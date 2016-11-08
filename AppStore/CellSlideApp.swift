@@ -55,7 +55,6 @@ extension CellSlideApp : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SlideCellFeatured", for: indexPath) as! SlideCellFeatured
-        
             cell.imageSlideCell.kf.indicatorType = .activity
         return cell
     }
@@ -80,6 +79,7 @@ extension CellSlideApp : UICollectionViewDelegate, UICollectionViewDelegateFlowL
         let urlString = arrImage?[indexPath.item]
         let url = URL(string: urlString!)!
         (cell as! SlideCellFeatured).imageSlideCell.kf.setImage(with: url, options: [.transition(.fade(1))])
+       
       
     }
     

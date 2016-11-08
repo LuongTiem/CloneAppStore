@@ -20,7 +20,6 @@
 		1677389B1DB4805700C92534 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 167738991DB4805700C92534 /* LaunchScreen.storyboard */; };
 		167738A61DB4809900C92534 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167738A51DB4809900C92534 /* DataManager.swift */; };
 		167738A81DB483CE00C92534 /* TopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167738A71DB483CE00C92534 /* TopApp.swift */; };
-		167738AA1DB48F0300C92534 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167738A91DB48F0300C92534 /* HomeView.swift */; };
 		16A88BF61DB69C4C0003D8DB /* SlideCellFeatured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A88BF41DB69C4C0003D8DB /* SlideCellFeatured.swift */; };
 		16A88BF71DB69C4C0003D8DB /* SlideCellFeatured.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A88BF51DB69C4C0003D8DB /* SlideCellFeatured.xib */; };
 		16A88BF91DB69E490003D8DB /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A88BF81DB69E490003D8DB /* DetailView.swift */; };
@@ -44,6 +43,7 @@
 		16F46E001DB8CBBD003BCF9A /* CellAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F46DFE1DB8CBBD003BCF9A /* CellAlbums.swift */; };
 		16F46E011DB8CBBD003BCF9A /* CellAlbums.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16F46DFF1DB8CBBD003BCF9A /* CellAlbums.xib */; };
 		531075721F8AEBDFD3B9486F /* Pods_AppStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09DC25A273799399D4341A67 /* Pods_AppStore.framework */; };
+		5FB623891DD1D17100CEFA19 /* CustomFooterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB623881DD1D17100CEFA19 /* CustomFooterHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +64,6 @@
 		1677389C1DB4805700C92534 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		167738A51DB4809900C92534 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		167738A71DB483CE00C92534 /* TopApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopApp.swift; sourceTree = "<group>"; };
-		167738A91DB48F0300C92534 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		16A88BF41DB69C4C0003D8DB /* SlideCellFeatured.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideCellFeatured.swift; sourceTree = "<group>"; };
 		16A88BF51DB69C4C0003D8DB /* SlideCellFeatured.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideCellFeatured.xib; sourceTree = "<group>"; };
 		16A88BF81DB69E490003D8DB /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		16F46DFC1DB8BED0003BCF9A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		16F46DFE1DB8CBBD003BCF9A /* CellAlbums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellAlbums.swift; sourceTree = "<group>"; };
 		16F46DFF1DB8CBBD003BCF9A /* CellAlbums.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellAlbums.xib; sourceTree = "<group>"; };
+		5FB623881DD1D17100CEFA19 /* CustomFooterHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFooterHeader.swift; sourceTree = "<group>"; };
 		E7895E56F93E2C88AEFE189A /* Pods-AppStore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore/Pods-AppStore.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +158,7 @@
 		167738A31DB4806200C92534 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5FB623861DD1CE8500CEFA19 /* IndicatorViewFooter */,
 				16E603441DBA00FA00543AA5 /* CellDetailView */,
 				167587421DB7839000779B65 /* CellCollectionMovies */,
 				16D2CE4A1DB766230002CE4F /* CellMusic */,
@@ -172,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				16F46DFC1DB8BED0003BCF9A /* BaseViewController.swift */,
-				167738A91DB48F0300C92534 /* HomeView.swift */,
 				16E21F941DB53E9B002F3140 /* TabFeatured.swift */,
 				166EFC091DB55E78004DAA34 /* TabTopApp.swift */,
 				166EFC0B1DB55E94004DAA34 /* TabTopMusic.swift */,
@@ -284,6 +284,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5FB623861DD1CE8500CEFA19 /* IndicatorViewFooter */ = {
+			isa = PBXGroup;
+			children = (
+				5FB623881DD1D17100CEFA19 /* CustomFooterHeader.swift */,
+			);
+			name = IndicatorViewFooter;
+			sourceTree = "<group>";
+		};
 		EF0854AFFA916AFBA5FC9F6F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,7 +331,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = ReasonAmu;
 				TargetAttributes = {
 					1677388C1DB4805600C92534 = {
@@ -429,7 +437,6 @@
 				16E21F9E1DB55088002F3140 /* CellTableViewFeatured.swift in Sources */,
 				16F46DFA1DB8AD56003BCF9A /* CellMusic.swift in Sources */,
 				167738911DB4805600C92534 /* AppDelegate.swift in Sources */,
-				167738AA1DB48F0300C92534 /* HomeView.swift in Sources */,
 				16F46DFD1DB8BED0003BCF9A /* BaseViewController.swift in Sources */,
 				16A88BF91DB69E490003D8DB /* DetailView.swift in Sources */,
 				16E603481DBA012F00543AA5 /* CellDetailApp.swift in Sources */,
@@ -440,6 +447,7 @@
 				160F77781DB4D02B00CDAA6C /* DetailModel.swift in Sources */,
 				167738A81DB483CE00C92534 /* TopApp.swift in Sources */,
 				167587451DB783AE00779B65 /* CellMovies.swift in Sources */,
+				5FB623891DD1D17100CEFA19 /* CustomFooterHeader.swift in Sources */,
 				16E21F991DB54DE6002F3140 /* CellFeatured.swift in Sources */,
 				16D2CE481DB75F140002CE4F /* CellApp.swift in Sources */,
 				16A88BF61DB69C4C0003D8DB /* SlideCellFeatured.swift in Sources */,

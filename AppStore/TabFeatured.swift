@@ -38,7 +38,7 @@ class TabFeatured: UIViewController {
     
     func loadData(){
         
-        DataManager.shareInstance.getTopFreeApp { (api) in
+        DataManager.shareInstance.getTopFreeApp(element: 10) { (api) in
             self.listAPI.append(api)
             self.tableViews.reloadData()
         }

@@ -66,10 +66,16 @@ class DetailView: BaseDetailView {
     
     func showList(){
         print("Show")
-        print(data?.category)
-        print(data?.price)
-        print(data?.id)
+        print(data?.category! as Any)
+        print(data?.price as Any)
+        print(data?.id as Any)
     }
+    
+    
+    
+    
+    
+    
     
 }
 
@@ -79,29 +85,16 @@ extension DetailView : UITableViewDelegate {
         return 2
     }
     
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row == 0 {
-//            return 150
-//        }
-//        else{
-//            return 1200
-//        }
-//    }
-    
-    
-    
-    
-        func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    
-            if indexPath.row == 0 {
-                return 150
-                
-            }else {
-                return 1000
-            }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 0 {
+            return 150
             
+        }else {
+            return 1000
         }
+        
+    }
     
 }
 
@@ -123,7 +116,7 @@ extension DetailView : UITableViewDataSource {
             cellSlide.loadDetailApp = dataDetail
             return cellSlide
             
-          
+            
             
         }else{
             if KEY == 1 {
@@ -131,19 +124,19 @@ extension DetailView : UITableViewDataSource {
                 //cell.setupViews = dataDetail
                 return cell
             }
-          
+            
             
             switch resultSegment {
             case 0:
                 let cell = tableview.dequeueReusableCell(withIdentifier: "CellDetailApp", for: indexPath) as! CellDetailApp
                 cell.setupViews = dataDetail
-              return cell
-              
+                return cell
+                
             case 1:
                 let cell = tableview.dequeueReusableCell(withIdentifier: "CellDetailApp", for: indexPath) as! CellDetailApp
                 cell.setupReview = dataDetail
                 return cell
-            
+                
             case 2:
                 let cell = tableview.dequeueReusableCell(withIdentifier: "CellDetailApp", for: indexPath) as! CellDetailApp
                 cell.setupRate = dataDetail
@@ -151,11 +144,11 @@ extension DetailView : UITableViewDataSource {
             default:
                 let cell = tableview.dequeueReusableCell(withIdentifier: "CellDetailApp", for: indexPath) as! CellDetailApp
                 cell.setupViews = dataDetail
-             return cell
-               
+                return cell
+                
             }
             
-          
+            
             
             
         }
